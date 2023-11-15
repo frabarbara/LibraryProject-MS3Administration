@@ -23,7 +23,7 @@ public class Controller {
     @PostMapping("/signup")
     public User signUp(@RequestBody User newUser) {
 
-        Integer signedUpUsers = 0;
+        User signedUpUser = null;
 
         /*#################### PARAMETERS CHECKS ####################*/
 
@@ -63,16 +63,16 @@ public class Controller {
         newUser.setUuid(UUID.randomUUID().toString());
 
         try {
-            signedUpUsers = rt.postForObject(
+            signedUpUser = rt.postForObject(
                     "http://localhost:8082/signup",
                     newUser,
-                    Integer.class
+                    User.class
             );
         } catch (Exception e) {
             System.err.println("[MS3Controller:signUp(User)] ERROR: postForObject failed");
         }
 
-        if (signedUpUsers == null || signedUpUsers != 1) {
+        if (signedUpUser == null) {
             throw new RuntimeException("[MS3Controller:signUp(User)] ERROR: DB update failed");
         }
 
