@@ -12,6 +12,14 @@ import java.util.regex.Pattern;
 @RestController
 public class Controller {
 
+    RestTemplate rt;
+
+    public Controller() {
+        this.rt = new RestTemplate();
+    }
+
+    /* ######################################## SIGNUP ######################################## */
+
     @PostMapping("/signup")
     public User signUp(@RequestBody User newUser) {
 
@@ -54,7 +62,6 @@ public class Controller {
 
         newUser.setUuid(UUID.randomUUID().toString());
 
-        RestTemplate rt = new RestTemplate();
         try {
             signedUpUsers = rt.postForObject(
                     "http://localhost:8082/signup",
@@ -70,6 +77,23 @@ public class Controller {
         }
 
         return newUser;
+    }
+
+    /* ######################################## LOGIN ######################################## */
+
+    @PostMapping("/login")
+    public User login(@RequestBody User credentials) {
+        User loggedUser;
+
+        System.out.println("[MS3Controller:login] credentials: email " + credentials.getEmail() + "; password " + credentials.getPassword());
+
+        loggedUser = rt.postForObject(
+                "http://localhost:8082/login",
+                credentials,
+                User.class
+        );
+
+        return loggedUser;
     }
 
 }
