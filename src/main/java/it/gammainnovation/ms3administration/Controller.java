@@ -45,18 +45,15 @@ public class Controller {
             throw new IllegalArgumentException("ERROR: unknown gender");
         }
 
-        /*if (!Pattern.matches("[a-z][0-9]+@[a-z][0-9]+.[a-z]{2,3}", newUser.getEmail())) {
+        if (!Pattern.matches("[a-z0-9]+@[a-z0-9]+[.][a-z]{2,3}", newUser.getEmail())) {
             System.err.println("ERROR: wrong email format");
             throw new IllegalArgumentException("ERROR: wrong email format");
         }
 
-        TODO: fix email and phone number format checks
-        */
-
-        /*if (!Pattern.matches("[+]?[0-9]{10,15}", newUser.getPhoneNumber())) {
+        if (!Pattern.matches("[+]?[0-9]{10,15}", newUser.getPhoneNumber())) {
             System.err.println("ERROR: wrong phone number format");
-            throw new IllegalArgumentException("ERROR: unknown gender");
-        }*/
+            throw new IllegalArgumentException("ERROR: wrong phone number format");
+        }
 
         /* #################### GEN UUID AND SEND REQUEST ####################*/
 
